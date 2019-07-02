@@ -1,7 +1,8 @@
-NVCC=nvcc
+CUDA_DIR=/usr/local/cuda-7.0
+NVCC=$(CUDA_DIR)/bin/nvcc
 CC = g++
 
-CUDA_INCLUDEPATH=/usr/local/cuda-6.5/include
+CUDA_INCLUDEPATH=$(CUDA_DIR)/include
 
 NVCC_OPTS=-O3 -arch=sm_35 -Xcompiler -m64 -g -G
 
