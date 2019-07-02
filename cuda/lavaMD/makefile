@@ -26,13 +26,13 @@ a.out:		main.o \
 			./util/num/num.o \
 			./util/timer/timer.o \
 			./util/device/device.o
-	$(C_C)	$(KERNEL_DIM) main.o \
+	$(CUD_C)	$(KERNEL_DIM) main.o \
 			./kernel/kernel_gpu_cuda_wrapper.o \
 			./util/num/num.o \
 			./util/timer/timer.o \
 			./util/device/device.o \
 			-lm \
-			-L/usr/local/cuda/lib64 \
+			-L$(CUDA_LIB_DIR) \
 			-lcuda -lcudart \
 			$(OMP_LIB) \
 			-o lavaMD
@@ -48,7 +48,7 @@ main.o:		main.h \
 			./util/timer/timer.c \
 			./util/device/device.h \
 			./util/device/device.cu
-	$(C_C)	$(KERNEL_DIM) $(OUTPUT) main.c \
+	$(CUD_C)	$(KERNEL_DIM) $(OUTPUT) main.c \
 			-c \
 			-o main.o \
 			-O3
