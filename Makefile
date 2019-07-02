@@ -15,7 +15,7 @@ all: CUDA OMP OPENCL
 CUDA: 
 	cd cuda/b+tree;				make;	cp b+tree.out $(CUDA_BIN_DIR)/b+tree-rodinia-3.1
 	cd cuda/backprop;			make;	cp backprop $(CUDA_BIN_DIR)/backprop-rodinia-3.1
-	cd cuda/bfs;				make;	cp bfs $(CUDA_BIN_DIR)/bfs-rodinia-3.1
+	cd cuda/bfs;				make;	cp bfs.out $(CUDA_BIN_DIR)/bfs-rodinia-3.1
 	cd cuda/cfd;				make;	cp euler3d $(CUDA_BIN_DIR)/euler3d-rodinia-3.1; \
 										cp euler3d_double $(CUDA_BIN_DIR)/euler3d_double-rodinia-3.1; \
 										cp pre_euler3d $(CUDA_BIN_DIR)/pre_euler3d-rodinia-3.1; \
