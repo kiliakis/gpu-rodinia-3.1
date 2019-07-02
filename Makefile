@@ -22,7 +22,7 @@ CUDA:
 										cp pre_euler3d_double $(CUDA_BIN_DIR)/pre_euler3d_double-rodinia-3.1
 	cd cuda/dwt2d;				make;   cp dwt2d  $(CUDA_BIN_DIR)/dwt2d-rodinia-3.1
 	cd cuda/gaussian;			make;	cp gaussian $(CUDA_BIN_DIR)/gaussian-rodinia-3.1
-	cd cuda/heartwall;			make;	cp heartwall $(CUDA_BIN_DIR)heartwall-rodinia-3.1
+	cd cuda/heartwall;			make;	cp heartwall $(CUDA_BIN_DIR)/heartwall-rodinia-3.1
 	cd cuda/hotspot;			make;	cp hotspot $(CUDA_BIN_DIR)/hotspot-rodinia-3.1
 	cd cuda/hotspot3D;			make;	cp 3D $(CUDA_BIN_DIR)/hotspot3D-rodinia-3.1
 	cd cuda/huffman;			make;	cp pavle $(CUDA_BIN_DIR)/pavle-rodinia-3.1
@@ -32,7 +32,7 @@ CUDA:
 	cd cuda/leukocyte;			make;	cp CUDA/leukocyte $(CUDA_BIN_DIR)/leukocyte-rodinia-3.1
 	cd cuda/lud;				make;	cp cuda/lud_cuda $(CUDA_BIN_DIR)/lud-rodinia-3.1
 	cd cuda/nn;					make;	cp nn $(CUDA_BIN_DIR)/nn-rodinia-3.1
-	cd cuda/nw;					make;	cp needle $(CUDA_BIN_DIR)-needle-rodinia-3.1
+	cd cuda/nw;					make;	cp needle $(CUDA_BIN_DIR)/nw-rodinia-3.1
 	cd cuda/myocyte;			make;	cp myocyte.out $(CUDA_BIN_DIR)/myocyte-rodinia-3.1
 	cd cuda/mummergpu;			make;	cp bin/mummergpu $(CUDA_BIN_DIR)/mummergpu-rodinia-3.1
 	cd cuda/srad/srad_v1;		make;	cp srad $(CUDA_BIN_DIR)/srad_v1-rodinia-3.1
