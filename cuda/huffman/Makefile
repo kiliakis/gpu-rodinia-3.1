@@ -1,10 +1,12 @@
-CUDA_DIR=/usr/local/cuda-7.0
+# CUDA_DIR=/usr/local/cuda-7.0
+include ../../common/make.config
+
 NVCC=$(CUDA_DIR)/bin/nvcc
 CC = g++
 
 CUDA_INCLUDEPATH=$(CUDA_DIR)/include
 
-NVCC_OPTS=-O3 -arch=sm_35 -Xcompiler -m64 -g -G
+NVCC_OPTS=-O3 -arch=sm_20 -Xcompiler -m64 -g -G
 
 GCC_OPTS=-O3 -Wall -Wextra -m64
 

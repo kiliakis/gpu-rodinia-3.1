@@ -26,7 +26,7 @@ CUDA:
 	cd cuda/hotspot;			make;	cp hotspot $(CUDA_BIN_DIR)/hotspot-rodinia-3.1
 	cd cuda/hotspot3D;			make;	cp 3D $(CUDA_BIN_DIR)/hotspot3D-rodinia-3.1
 	cd cuda/huffman;			make;	cp pavle $(CUDA_BIN_DIR)/pavle-rodinia-3.1
-	cd cuda/hybridsort;			make;   cp hybridsort $(CUDA_BIN_DIR)/hybridsort-rodinia-3.1
+	cd cuda/hybridsort;			make VERIFY=1;   cp hybridsort $(CUDA_BIN_DIR)/hybridsort-rodinia-3.1
 	cd cuda/kmeans;				make;	cp kmeans $(CUDA_BIN_DIR)/kmeans-rodinia-3.1
 	cd cuda/lavaMD;				make;	cp lavaMD $(CUDA_BIN_DIR)/lavaMD-rodinia-3.1
 	cd cuda/leukocyte;			make;	cp CUDA/leukocyte $(CUDA_BIN_DIR)/leukocyte-rodinia-3.1
