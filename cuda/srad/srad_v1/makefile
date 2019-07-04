@@ -31,7 +31,7 @@ main.o: 	main.cu \
 				srad2_kernel.cu \
 				compress_kernel.cu
 	$(CC)	main.cu \
-				-c -O3 -arch sm_20
+				-c -O3 -arch sm_13
 
 # delete all object files
 clean:
