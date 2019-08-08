@@ -252,13 +252,14 @@ int compute_tran_temp(float *MatrixPower,float *MatrixTemp[2], int col, int row,
 
 void usage(int argc, char **argv)
 {
-	fprintf(stderr, "Usage: %s <grid_rows/grid_cols> <pyramid_height> <sim_time> <temp_file> <power_file> <output_file>\n", argv[0]);
+	fprintf(stderr, "Usage: %s <grid_rows/grid_cols> <pyramid_height> <sim_time> <temp_file> <power_file> <output_file> <goldfile>\n", argv[0]);
 	fprintf(stderr, "\t<grid_rows/grid_cols>  - number of rows/cols in the grid (positive integer)\n");
 	fprintf(stderr, "\t<pyramid_height> - pyramid heigh(positive integer)\n");
 	fprintf(stderr, "\t<sim_time>   - number of iterations\n");
 	fprintf(stderr, "\t<temp_file>  - name of the file containing the initial temperature values of each cell\n");
 	fprintf(stderr, "\t<power_file> - name of the file containing the dissipated power values of each cell\n");
-	fprintf(stderr, "\t<output_file> - name of the output file\n");
+  fprintf(stderr, "\t<output_file> - name of the output file\n");
+	fprintf(stderr, "\t<goldfile> - file to verify output\n");
 	exit(1);
 }
 
@@ -277,11 +278,12 @@ void run(int argc, char** argv)
     int grid_rows,grid_cols;
     float *FilesavingTemp,*FilesavingPower,*MatrixOut; 
     char *tfile, *pfile, *ofile;
+    const char* goldfile;
     
     int total_iterations = 60;
     int pyramid_height = 1; // number of iterations
 	
-	if (argc != 7)
+	if (argc != 8)
 		usage(argc, argv);
 	if((grid_rows = atoi(argv[1]))<=0||
 	   (grid_cols = atoi(argv[1]))<=0||
@@ -292,7 +294,7 @@ void run(int argc, char** argv)
 	tfile=argv[4];
     pfile=argv[5];
     ofile=argv[6];
-	
+	  goldfile = argv[6];
     size=grid_rows*grid_cols;
 
     /* --------------- pyramid parameters --------------- */
@@ -336,4 +338,37 @@ void run(int argc, char** argv)
     cudaFree(MatrixTemp[0]);
     cudaFree(MatrixTemp[1]);
     free(MatrixOut);
+
+    if(goldfile){
+      FILE *gold = fopen(goldfile, "r");
+      FILE *result = fopen(ofile, "r");
+      int index_result=0, index_gold=0;
+      float value_result=0.0, value_gold=0.0;
+      int result_error=0;
+      float total_error=0.0, avg_error=0.0;
+
+      while( fscanf(gold,"%d\t%f\n",&index_gold,&value_gold)==2 && fscanf(result,"%d\t%f\n",&index_result,&value_result)==2 ) {
+        if(index_gold != index_result) {
+          result_error = 1;
+          break;
+        }
+        float error = (value_gold - value_result) / value_gold;
+        error = error>=0.0?error:-error;
+        total_error += error;
+      }
+      avg_error = total_error/(float)(index_gold+1);
+      printf("total_error=%.9f\navg_error=%.9f\n", total_error, avg_error);
+
+      if(avg_error > 0.0001)
+        result_error = 1;
+
+      if((feof(gold)^feof(result)) | result_error) {
+        printf("\nFAILED\n");
+      } else {
+        printf("\nPASSED\n");
+      }
+
+      fclose(gold);
+      fclose(result);
+    }
 }
